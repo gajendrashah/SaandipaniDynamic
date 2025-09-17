@@ -1,0 +1,495 @@
+{% extends 'sanapp/base.html' %}
+{% block content %}
+
+{% load static %}
+
+<!-- Include Slick Carousel CSS -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+<style>
+    .team-img img {
+        height: 250px;
+        /* Adjust as needed */
+        object-fit: cover;
+    }
+
+    .testimonial-item img {
+        width: 100%;
+        /* Ensures the image scales properly */
+        height: 150px;
+        /* Fixed height for consistency */
+        object-fit: cover;
+        /* Prevents stretching and maintains aspect ratio */
+    }
+
+    .testimonial-item .row {
+        display: flex;
+        align-items: stretch;
+        /* Ensures both columns are of equal height */
+    }
+
+    .testimonial-item .col-4,
+    .testimonial-item .col-8 {
+        display: flex;
+    }
+
+    .testimonial-item .col-4 .h-100,
+    .testimonial-item .col-8 .d-flex {
+        flex-grow: 1;
+    }
+
+    .testimonial-item .d-flex.flex-column {
+        justify-content: center;
+        /* Centers text vertically */
+    }
+
+    .header-carousel-item {
+        padding: 100px 0;
+        /* Adds padding for better spacing */
+    }
+
+    .feature-item {
+        transition: transform 0.3s ease;
+        /* Adds hover effect */
+    }
+
+    .feature-item:hover {
+        transform: translateY(-10px);
+        /* Lifts the card on hover */
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: #f8f9fa;
+        /* Light background for active accordion */
+    }
+
+    /* popup model */
+
+    .popup {
+        
+            z-index: 5;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            padding: 10px;
+ 
+            background-color: #fff;
+            border-radius: 10px;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+        }
+
+        .popup p {
+            margin-bottom: 20px;
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+</style>
+
+<div class="overlay" id="overlay"></div>
+
+    <div class="popup" id="popup">
+        <h2>Special Offer!</h2>
+        <img src="{% static 'sanapp/img/caroselheader.jpg' %}" alt="" class="img-fluid w-100">
+        <p>Get 50% off on your first purchase. Limited time only!</p>
+        <button id="closePopup">Close</button>
+    </div>
+
+<!-- Carousel Start -->
+<div class="header-carousel owl-carousel">
+    <!-- <div class="header-carousel-item" style="margin-top: -100px;">
+        
+                <div class="row">
+                    <div class="col-lg-12 animated fadeInLeft">
+                        <div class="calrousel-img">
+                            <img src="{% static 'sanapp/img/caroselheader.jpg' %}" class="img-fluid w-100" alt="">
+                        </div>
+                    </div>
+                </div>
+            
+    </div> -->
+    {% for carosel in carousel %}
+    {% if forloop.counter|divisibleby:2 %}
+    <div class="header-carousel-item bg-primary">
+        <div class="carousel-caption">
+            <div class="container">
+                <div class="row gy-4 gy-lg-0 gx-0 gx-lg-5 align-items-center">
+                    <div class="col-lg-5 animated fadeInLeft">
+                        <div class="calrousel-img">
+                            <img style="width:2600px; height: 450px;" src="{{ carosel.image.url }}"
+                                class="img-fluid w-100" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-7 animated fadeInRight">
+                        <div class="text-sm-center text-md-end">
+                            <h4 class="text-white text-uppercase mb-1">{{ carosel.subtitle }}</h4>
+                            <h1 class="display-4 text-white mb-4">{{ carosel.title }}</h1>
+                            <p class="mb-5 fs-5">{{ carosel.quote }}</p>
+                            <div class="d-flex justify-content-center justify-content-md-end flex-shrink-0 mb-4">
+                                <a class="btn btn-dark rounded-pill py-3 px-4 px-md-5 ms-2"
+                                    href="{% url 'service' %}">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="header-carousel-item bg-primary">
+        <div class="carousel-caption">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-7 animated fadeInLeft">
+                        <div class="text-sm-center text-md-start">
+                            <h4 class="text-white text-uppercase mb-1">{{ carosel.subtitle }}</h4>
+                            <h1 class="display-4 text-white mb-4">{{ carosel.title }}</h1>
+                            <p class="mb-5 fs-5">
+                                {{ carosel.quote }}
+                            </p>
+                            <div class="d-flex justify-content-center justify-content-md-start flex-shrink-0 mb-4">
+                                <a class="btn btn-dark rounded-pill py-3 px-4 px-md-5 ms-2"
+                                    href="{% url 'service' %}">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 animated fadeInRight">
+                        <div class="calrousel-img" style="object-fit: cover;">
+                            <img style="width:2600px; height: 450px;" src="{{ carosel.image.url }}"
+                                class="img-fluid w-100" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% endfor %}
+</div>
+<!-- Carousel End -->
+
+{% for ad in ads %}
+<div class="ad-section">
+    <div class="ad-image">
+        <img src="{{ad.image.url}}" alt="Ad Image">
+    </div>
+    <div class="ad-text">
+        <h4><marquee>{{ad.title}}</marquee></h4>
+        <!-- <p>{{ad.description}}</p> -->
+        <!-- <a href="#" class="ad-button">Learn More</a> -->
+    </div>
+</div>
+{% endfor %}
+
+
+<!-- Feature Start -->
+<div class="container-fluid feature bg-light py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Our Services</h4>
+            <h1 class="display-6 mb-4">Empowering Your Global Education Journey with Expert Guidance and Support</h1>
+            <p class="mb-0">
+                Saandipani Educational Group guides students in overseas education with personalized counseling,
+                application support, test prep (IELTS, PTE, TOEFL), and visa assistance. Our experts help with college
+                selection, application materials, and travel tips, ensuring a smooth transition for students pursuing
+                international studies.
+            </p>
+        </div>
+        <div class="row g-4">
+            {% for ser in services %}
+
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="feature-item h-100 p-4 pt-0">
+                    <div class="feature-icon p-4 mb-4">
+                        <i class="">
+                            <img src="{{ser.image.url}}" class="img-fluid rounded" style="width: 250px; height: 50px;"
+                                alt="">
+                        </i>
+
+                    </div>
+                    <div class="gap-2" style="line-height: 20px;">
+                        <h5 class="mb-3 p-0">{{ser.title}}</h5>
+                        <p class="mb-2 p-0">{{ser.description|safe|slice:"100"}}</p>
+                    </div>
+                    <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'service' %}">Learn More</a>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+<!-- Feature End -->
+
+<!-- About Start -->
+<div class="container-fluid bg-light about pb-5">
+    <div class="container pb-5">
+        <div class="row g-5">
+            {% for aboutd in about %}
+            <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+
+                <div class="about-item-content bg-white rounded p-5 h-100">
+                    <h4 class="text-primary">About Our Company</h4>
+
+                    <h1 class="display-5 mb-4">{{aboutd.title}}</h1>
+                    <div style="text-align: justify;">
+                        <p>{{aboutd.description|safe|slice:"1000"}}
+                        </p>
+
+                        <p class="text-dark"><i class="fa fa-check text-primary me-3"></i>Expertise and Personalized
+                            Counseling
+                        </p>
+                        <p class="text-dark"><i class="fa fa-check text-primary me-3"></i>Comprehensive Support</p>
+                        <p class="text-dark mb-4"><i class="fa fa-check text-primary me-3"></i>Test Preparation and
+                            Well-Equipped Learning Environment</p>
+                        <a class="btn btn-primary rounded-pill py-3 px-5" href="{% url 'about' %}">More Information</a>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
+                <div class="bg-white rounded p-5 h-100">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-12">
+                            <div class="rounded bg-light">
+                                <img src="{{aboutd.image.url}}" class="img-fluid rounded w-100" alt="">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="counter-item rounded p-3 h-100" style="text-align: justify;">
+                                <div class="counter-counting">
+
+                                    <span class="h4 fw-bold text-primary">Mission</span>
+                                </div>
+                                <p class="mb-0">
+                                    {{aboutd.mission|safe|slice:"400"}}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="counter-item bg-light rounded p-3 h-100" style="text-align: justify;">
+                                <div class="counter-counting">
+                                    <span class="h4 fw-bold text-primary">Vision</span>
+                                </div>
+                                <p class="mb-0">
+                                    {{aboutd.vision|safe|slice:"400"}}
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- About End -->
+
+
+
+<!-- Team Start -->
+<div class="container-fluid team pb-5">
+    <div class="container pb-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary mt-5">Country</h4>
+            <h1 class="display-4 mb-4">Top Desitnation For You Study</h1>
+            <!-- <p class="mb-0">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur adipisci facilis cupiditate recusandae aperiam temporibus corporis itaque quis facere, numquam, ad culpa deserunt sint dolorem autem obcaecati, ipsam mollitia hic.
+                    </p> -->
+        </div>
+
+
+
+        <div class="row g-4">
+            {% for top_des in top_destinations %}
+
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                {% if top_des.country == country.name %}
+
+                {% for count in countries %}
+                <a href="{% url 'country' country_name=count.name|lower %}">
+
+                    {% endfor %}
+                    {% endif %}
+                    <div class="team-item h-100 d-flex flex-column">
+
+                        <div class="team-img">
+                            <img style="height: auto; display: block; width: 100%;" src="{{ top_des.image.url }}"
+                                class="img-fluid rounded-top w-100" alt="">
+                        </div>
+                        <div class="team-title p-4 flex-grow-1 d-flex flex-column">
+                            <h4 class="mb-0">{{ top_des.title }}</h4>
+                            <p class="mb-0">{{ top_des.description|safe|slice:"100" }}</p>
+                            <!--{% for country in countries %}-->
+                            <!--{% if country and country.name %}-->
+                            <!--<a class="btn btn-primary rounded-pill py-2 px-4 b-0" href="{% url 'country' country_name=country.name|lower %}">Learn More</a>-->
+                            <!--{% endif %}-->
+                            <!--{% endfor %}-->
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+
+
+            {% endfor %}
+        </div>
+
+
+    </div>
+</div>
+<!-- Team End -->
+
+<!-- Testimonial Start -->
+        <!-- Testimonial Start -->
+        <div class="container-fluid testimonial pb-5">
+            <div class="container pb-5">
+                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                    <h4 class="text-primary">Testimonial</h4>
+                    <h1 class="display-4 mb-4">What Our Students Are Saying</h1>
+                    <p class="mb-0">"The insights and strategies provided by Saandipani were transformative. Their expert
+                        guidance helped us overcome challenges and achieve measurable success. Highly recommended for anyone
+                        seeking top-tier consultancy!"
+                    </p>
+                </div>
+                
+                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.2s">
+                    {% for tes in testimonials %}
+                    <div class="testimonial-item bg-light rounded">
+                        
+                        <div class="row g-0">
+                            <div class="col-4  col-lg-4 col-xl-3">
+                                <div class="h-100">
+                                    <img src="{{ tes.image.url }}" class="img-fluid h-100 rounded" style="object-fit: cover;" alt="">
+                                </div>
+                            </div>
+                            <div class="col-8 col-lg-8 col-xl-9">
+                                <div class="d-flex flex-column my-auto text-start p-4">
+                                    <h4 class="text-dark mb-0">{{tes.name}}</h4>
+                                    <p class="mb-3">{{tes.position}}</p>
+                                    <div class="d-flex text-primary mb-3">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p class="mb-0">{{tes.description|safe}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+        </div>
+        <!-- Testimonial End -->
+
+
+<!-- FAQs Start -->
+<div class="container-fluid faq-section bg-light py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Some Important FAQ's</h4>
+            <h1 class="display-4 mb-4">Common Frequently Asked Questions</h1>
+        </div>
+        <div class="row g-5">
+            {% for faq in faqs %}
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="accordion" id="accordionFAQ{{ forloop.counter }}">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false"
+                                aria-controls="collapse{{ forloop.counter }}">
+                                Q: {{ faq.question }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse"
+                            aria-labelledby="heading{{ forloop.counter }}"
+                            data-bs-parent="#accordionFAQ{{ forloop.counter }}">
+                            <div class="accordion-body">
+                                A: {{ faq.answer|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- FAQs End -->
+
+<script>
+    // Automatically show the popup after 3 seconds
+    setTimeout(function() {
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('popup').style.display = 'block';
+    }, 3000); // 3000 milliseconds = 3 seconds
+
+    // Close the popup when the close button is clicked
+    document.getElementById('closePopup').addEventListener('click', function() {
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('popup').style.display = 'none';
+    });
+
+    // Close the popup when the overlay is clicked
+    document.getElementById('overlay').addEventListener('click', function() {
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('popup').style.display = 'none';
+    });
+</script>
+
+
+
+{% endblock %}

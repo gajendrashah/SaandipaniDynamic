@@ -1,0 +1,18 @@
+
+# Environment
+.env
+*.env
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Migrations (optional, if you want to ignore them)
+# */migrations/*.pyc
+# */migrations/__pycache__/
+

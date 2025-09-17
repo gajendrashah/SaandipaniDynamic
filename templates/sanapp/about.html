@@ -1,0 +1,147 @@
+{% extends 'sanapp/base.html' %}
+{% block content %}
+
+{% load static %}
+
+        <!-- About Start -->
+        <div class="container-fluid bg-light about py-4">
+            <div class="container py-4">
+                <div class="row g-5">
+                    {% for aboutd in about %}
+                    <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+                        
+                        <div class="about-item-content bg-white rounded p-5 h-100">
+                            <h4 class="text-primary">About Our Company</h4>
+                            
+                            <h1 class="display-5 mb-4">{{aboutd.title}}</h1>
+                            <div style="text-align: justify;">
+                                <p>{{aboutd.description|safe}}
+                                </p>
+    
+                                <p class="text-dark"><i class="fa fa-check text-primary me-3"></i>Expertise and Personalized Counseling
+                                </p>
+                                <p class="text-dark"><i class="fa fa-check text-primary me-3"></i>Comprehensive Support</p>
+                                <p class="text-dark mb-4"><i class="fa fa-check text-primary me-3"></i>Test Preparation and Well-Equipped Learning Environment</p>
+                                <a class="btn btn-primary rounded-pill py-3 px-5" href="{% url 'about' %}">More Information</a>
+                            </div>
+                            
+                           
+                        </div>
+                        
+                    </div>
+                    <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
+                        <div class="bg-white rounded p-5 h-100">
+                            <div class="row g-4 justify-content-center">
+                                <div class="col-12">
+                                    <div class="rounded bg-light">
+                                        <img src="{{aboutd.image.url}}" class="img-fluid rounded w-100" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="counter-item rounded p-3 h-100" style="text-align: justify;">
+                                        <div class="counter-counting">
+                                            
+                                            <span class="h4 fw-bold text-primary">Mission</span>
+                                        </div>
+                                        <p class="mb-0">
+                                            {{aboutd.mission|safe}}
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-sm-12">
+                                    <div class="counter-item bg-light rounded p-3 h-100" style="text-align: justify;">
+                                        <div class="counter-counting">
+                                            <span class="h4 fw-bold text-primary">Vision</span>
+                                        </div>
+                                        <p class="mb-0">
+                                            {{aboutd.vision|safe}}
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- About End -->
+
+
+        <!-- Feature Start -->
+        <!-- <div class="container-fluid feature bg-light py-5">
+            <div class="container py-5">
+                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                    <h4 class="text-primary">Our Services</h4>
+                    <h1 class="display-6 mb-4">Empowering Your Global Education Journey with Expert Guidance and Support</h1>
+                    <p class="mb-0">
+                        Saandipani Educational Group guides students in overseas education with personalized counseling, application support, test prep (IELTS, PTE, TOEFL), and visa assistance. Our experts help with college selection, application materials, and travel tips, ensuring a smooth transition for students pursuing international studies.
+                    </p>
+                </div>
+                <div class="row g-4">
+                    {% for ser in services %}
+                    
+                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="feature-item h-100 p-4 pt-0">
+                            <div class="feature-icon p-4 mb-4">
+                                <i class="">
+                                    <img src="{{ser.image.url}}" class="img-fluid rounded" style="width: 250px; height: 50px;" alt="">
+                                </i>
+                                
+                            </div>
+                            <div class="gap-2" style="line-height: 20px;">
+                                <h5 class="mb-3 p-0">{{ser.title}}</h5>
+                                <p class="mb-2 p-0">{{ser.description|safe}}</p>
+                            </div>
+                            <a class="btn btn-primary rounded-pill py-2 px-4" href="{% url 'service' %}">Learn More</a>
+                        </div>
+                    </div>
+
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div> -->
+        <!-- Feature End -->
+
+
+
+        <!-- Team Start -->
+        <div class="container-fluid team py-5">
+            <div class="container py-5">
+                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                    <h4 class="text-primary">Our Team</h4>
+                    <h1 class="display-4 mb-4">Meet Our Expert Team Members</h1>
+                    <p class="mb-0">"Our team is a blend of expertise, innovation, and dedication — committed to turning challenges into opportunities and strategies into success."
+                    </p>
+                </div>
+                <div class="row g-4">
+                    {% for expert in expert_team %}
+                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="team-item">
+                            <div class="team-img">
+                                <img src="{{expert.image.url}}" class="img-fluid rounded-top w-100" alt="">
+                                
+                            </div>
+                            <div class="team-title p-4">
+                                <h4 class="mb-0">{{expert.name}}</h4>
+                                <p class="mb-0">{{expert.position}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- Team End -->
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+{% endblock %}
