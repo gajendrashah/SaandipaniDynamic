@@ -1,0 +1,334 @@
+{% extends 'sanapp/base.html' %}
+{% block content %}
+
+{% load static %}
+
+<!-- Import Animation Libraries -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script>new WOW().init();</script>
+
+<style>
+    /* General Styles */
+    .image-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .image-effect {
+        transition: transform 0.5s ease-in-out;
+    }
+
+    .image-container:hover .image-effect {
+        transform: scale(1.1);
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .image-container:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .service-item {
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+        border-radius: 10px;
+    }
+
+    .service-item:hover {
+        transform: translateY(-8px);
+    }
+
+    .bg-light {
+        background: #F9FAFC !important;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    /* visa process */
+        .step {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .step.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+
+        .course-item img {
+        width: 100%; /* Ensures full width */
+        height: 250px; /* Set a fixed height */
+        object-fit: cover; /* Crops to fit without stretching */
+
+        .course-item {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .course-item .text-center {
+        flex-grow: 1; /* Ensures equal height */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    }
+</style>
+
+<!-- Hero Section -->
+<!-- Hero Section -->
+{% for studyc in study_country %}
+<div class="container-fluid bg-primary p-5 hero-header d-flex align-items-center justify-content-center text-center"  
+     style="background: url('{{studyc.image.url}}') center/cover no-repeat; height: 80vh;">
+    <div class="container text-white">
+        <p class="fs-4 mb-4 animated slideInUp py-4" style="color: black;">Your gateway to world-class education in the UK</p>
+    </div>
+</div>
+{% endfor %}
+
+<!-- Overview Section -->
+<div class="container-xxl py-5" id="learn-more">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            {% for studyc in study_country %}
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="text-primary text-uppercase mb-2">About UK</h6>
+                <h1 class="mb-4">Why Study in UK?</h1>
+                <p class="mb-4">{{ studyc.description|safe }}</p>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-check-circle text-primary me-2"></i>Support services for international students</li>
+                    <li><i class="fa fa-check-circle text-primary me-2"></i>Global Appreciation</li>
+                    <li><i class="fa fa-check-circle text-primary me-2"></i>Supportive Business Training and Study</li>
+                    <li><i class="fa fa-check-circle text-primary me-2"></i>Diversity of Education Prospects</li>
+                    <li><i class="fa fa-check-circle text-primary me-2"></i>Use of latest Technology in Study</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="image-container">
+                    <img class="image-effect w-100" src="{{ studyc.image.url }}" alt="Study in UK" style="border-radius: 15px;">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Education System -->
+<div class="container-xxl py-5">
+    <div class="container text-center wow fadeInUp" data-wow-delay="0.1s">
+        <h6 class="text-primary text-uppercase">Education System</h6>
+        <h1 class="mb-5">Education System and Expenses in the UK</h1>
+    </div>
+    <div class="row g-4 d-flex align-items-stretch">
+        {% for studyc in study_country %}
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" style="max-height: 400px; overflow-y: auto;">
+            <div class="service-item p-4 h-100">
+                <i class="fa fa-graduation-cap fa-3x text-primary mb-3"></i>
+                <h5>Academic Structure</h5>
+                <p>{{ studyc.education_system|safe }}</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s" style="max-height: 400px; overflow-y: auto;">
+            <div class="service-item p-4 h-100">
+                <i class="fa fa-dollar-sign fa-3x text-primary mb-3"></i>
+                <h5>Study Expenses</h5>
+                <p>{{ studyc.expenses|safe }}</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s" style="max-height: 400px; overflow-y: auto;">
+            <div class="service-item p-4 h-100">
+                <i class="fa fa-university fa-3x text-primary mb-3"></i>
+                <h5>Choose University</h5>
+                <p>{{ studyc.university|safe }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+<!-- Work Opportunities -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center pb-4 wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="text-primary text-uppercase">Work Opportunities</h6>
+            <h1 class="mb-5">Career Prospects in the UK</h1>
+        </div>
+        <div class="row g-4">
+            {% for studyc in study_country %}
+            <div class="col-lg-6">
+                <div class="bg-light">
+                    <h3>Work During Studies</h3>
+                    <p>{{ studyc.work_permit|safe }}</p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="bg-light" style="max-height: 500px; overflow-y: auto;">
+                    <h3>Post-Study Work Visa</h3>
+                    <p>{{ studyc.work_visa|safe }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Popular Courses Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title bg-white text-center text-primary px-3">Courses</h6>
+            <h1 class="mb-5">Popular Courses in UK</h1>
+        </div>
+        <div class="row g-4 justify-content-center">
+            {% for popular_course in popular_courses %}
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="course-item bg-light">
+                    <div class="position-relative overflow-hidden">
+                        <img class="img-fluid" src="{{ popular_course.image.url }}" alt="{{ popular_course.title }}">
+                        <div class="w-100 d-flex justify-content-center position-absolute bottom-0 start-0 mb-4">
+                            <a href="#" class="btn btn-primary py-2 px-4">Read More</a>
+                        </div>
+                    </div>
+                    <div class="text-center p-4 pb-0">
+                        <h5 class="mb-4">{{ popular_course.title }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Popular Courses End -->
+
+<!-- Call To Action Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="bg-light rounded p-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                    <h2>Visa Process</h2>
+                    <div class="step active" id="step1">
+                        <h3>First Step: Applying for Admission</h3>
+                        <p>Required Documents:</p>
+                        <ul>
+                            <li>Passport</li>
+                            <li>SLC / HSEB / Bachelor Degree Mark Sheet</li>
+                            <li>Provisional/Migration Certificate</li>
+                            <li>IELTS Score or Equivalent</li>
+                            <li>Work Experience Document</li>
+                            <li>Resume</li>
+                            <li>Statement of Purpose (SOP)</li>
+                            <li>Reference Letter (if available)</li>
+                        </ul>
+                    </div>
+                    <div class="step" id="step2">
+                        <h3>Second Step: Offer Letter</h3>
+                        <p>If approved by the institution, a letter of offer will be received.</p>
+                    </div>
+                    <div class="step" id="step3">
+                        <h3>Third Step: Documentation Requirement</h3>
+                        <p>Additional Required Documents:</p>
+                        <ul>
+                            <li>Relationship Certificate</li>
+                            <li>Property Valuation</li>
+                            <li>Income Sources</li>
+                            <li>Rent/Lease Agreements</li>
+                            <li>Agriculture/Business Details</li>
+                            <li>Salary Income, Bank Balance/Loan</li>
+                            <li>CA Report</li>
+                            <li>Translated Documents (Lalpurja, Citizenship)</li>
+                            <li>Police Report</li>
+                            <li>Sponsor Letter / Affidavit of Support</li>
+                            <li>No Objection Letter</li>
+                        </ul>
+                    </div>
+                    <button onclick="nextStep()">Next</button>
+                    <button onclick="prevStep()">Prev</button>
+                </div>
+                <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                    <h1 class="display-5 mb-4">Ready to Start Your UK Education Journey?</h1>
+                    <p class="mb-4">Contact our expert counselors today for personalized guidance on admissions, visa process, and everything you need to know about studying in UK.</p>
+                    <a class="btn btn-primary py-3 px-5" href="{% url 'contact' %}">Contact Us Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FAQs Start -->
+<div class="container-fluid faq-section bg-light py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Some Important FAQ's</h4>
+            <h1 class="display-4 mb-4">Common Frequently Asked Questions</h1>
+        </div>
+        <div class="row g-5">
+            {% for faq in faqs %}
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="accordion" id="accordionFAQ{{ forloop.counter }}">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">
+                                Q: {{ faq.question }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ forloop.counter }}" data-bs-parent="#accordionFAQ{{ forloop.counter }}">
+                            <div class="accordion-body">
+                                A: {{ faq.answer|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- FAQs End -->
+
+<script>
+    let currentStep = 1;
+    function nextStep() {
+        document.getElementById(`step${currentStep}`).classList.remove('active');
+        currentStep++;
+        if (currentStep > 3) currentStep = 1;
+        document.getElementById(`step${currentStep}`).classList.add('active');
+    }
+    function prevStep() {
+        document.getElementById(`step${currentStep}`).classList.remove('active');
+        currentStep--;
+        if (currentStep < 1) currentStep = 3;
+        document.getElementById(`step${currentStep}`).classList.add('active');
+    }
+</script>
+
+{% endblock %}

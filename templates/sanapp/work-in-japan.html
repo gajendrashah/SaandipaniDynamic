@@ -1,0 +1,409 @@
+{% extends 'sanapp/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .workin {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        background: linear-gradient(135deg, #1f1c2c, #928dab);
+        color: #fff;
+        padding: 20px;
+    }
+
+    header {
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+    }
+
+    .logo {
+        font-size: 1.8em;
+        font-weight: bold;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+    }
+
+    nav a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    nav a:hover {
+        color: #f39c12;
+    }
+
+    .hero {
+        text-align: center;
+        padding: 100px 20px;
+    }
+
+    .hero h1 {
+        font-size: 3.5em;
+        animation: slideIn 1.5s ease-in-out;
+    }
+
+    .hero p {
+        font-size: 1.2em;
+        margin: 20px 0 40px;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+
+
+    .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 50px 0;
+    }
+
+    .feature-card {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        animation: fadeInUp 1s ease-in-out;
+    }
+
+    .feature-card h3 {
+        margin-bottom: 10px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 50px;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeInUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.5em;
+        }
+
+        nav ul {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    .work {
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 60vh;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    h1.headtag {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        color: red;
+        animation: slideInFromLeft 1.5s ease-out;
+    }
+
+
+
+    p.ptag {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+        animation: slideInFromRight 1.5s ease-out;
+    }
+
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInFromLeft {
+        from {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInFromRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .bubbles {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+    }
+
+    .bubble {
+        width: 20px;
+        height: 20px;
+        background-color: green;
+        border-radius: 50%;
+        opacity: 0.7;
+        animation: floatUp 5s infinite ease-in-out;
+    }
+
+    .bubble:nth-child(2) {
+        animation-duration: 6s;
+    }
+
+    .bubble:nth-child(3) {
+        animation-duration: 7s;
+    }
+
+    .bubble:nth-child(4) {
+        animation-duration: 8s;
+    }
+
+    .bubble:nth-child(5) {
+        animation-duration: 9s;
+    }
+
+    @keyframes floatUp {
+        from {
+            transform: translateY(0);
+            opacity: 0.7;
+        }
+
+        to {
+            transform: translateY(-500px);
+            opacity: 0;
+        }
+    }
+
+    section {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .hero {
+            background: url('https://source.unsplash.com/featured/?japan') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            animation: slideIn 2s ease-in-out;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: popUp 1s ease-out forwards;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        @keyframes popUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</style>
+
+
+
+
+<div class="work"
+    style="background: linear-gradient(rgba(46, 83, 62, 0.6), rgba(45, 70, 58, 0.6)), url('{% static 'sanapp/img/workinjapan.jpg' %}') center/cover no-repeat;">
+    <div class="container">
+        <h1 class="headtag">Discover Your Dream Job in Japan</h1>
+        <p class="ptag">Explore exciting career opportunities and build your future in Japan.
+        </p>
+        <!-- <button class="btn">Explore More</button> -->
+    </div>
+
+    <div class="bubbles">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+    </div>
+</div>
+
+<section>
+    <div class="container m-5">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="catagories">
+                    <h1>Catagories::</h1>
+                    <p>catagories list</p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="newsletter">
+                    <h1>Newsletter::</h1>
+                    <p>News List</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<div class="workin">
+    <section class="hero">
+        <h1>Discover Your Dream Job in Japan</h1>
+        <p>Explore exciting career opportunities and build your future in Japan.</p>
+        <button class="btn">Get Started</button>
+    </section>
+
+    <section class="features">
+        <div class="feature-card">
+            <h3>Job Listings</h3>
+            <p>Find the latest job openings tailored to your skills and experience.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Visa Assistance</h3>
+            <p>We guide you through the visa application process step by step.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Career Advice</h3>
+            <p>Receive personalized career coaching and interview tips.</p>
+        </div>
+</div>
+</section>
+
+<section>
+    <h2 class="section-title">Why Work in Japan?</h2>
+    <div class="content">
+        <div class="card">High-tech Innovation</div>
+        <div class="card">Rich Cultural Heritage</div>
+        <div class="card">Dynamic Job Market</div>
+    </div>
+</section>
+
+<section>
+    <h2 class="section-title">Job Categories</h2>
+    <div class="content">
+        <div class="card">IT & Technology</div>
+        <div class="card">Education & Teaching</div>
+        <div class="card">Engineering & Manufacturing</div>
+    </div>
+</section>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".card");
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.3}s`;
+        });
+    });
+</script>
+<script>
+    document.querySelector('.btn').addEventListener('click', () => {
+        alert('Button Clicked! Let’s explore more!');
+    });
+</script>
+
+{% endblock %}

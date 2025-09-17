@@ -1,0 +1,87 @@
+{% extends 'sanapp/base.html' %}
+{% block content %}
+
+{% load static %}
+
+<!-- Feature Start -->
+<div class="container-fluid feature bg-light py-5">
+    <div class="container py-5">
+        <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+            <h4 class="text-primary">Our Services</h4>
+            <h1 class="display-6 mb-4">Empowering Your Global Education Journey with Expert Guidance and Support</h1>
+            <p class="mb-0">
+                Saandipani Educational Group guides students in overseas education with personalized counseling, application support, test prep (IELTS, PTE, TOEFL), and visa assistance. Our experts help with college selection, application materials, and travel tips, ensuring a smooth transition for students pursuing international studies.
+            </p>
+        </div>
+        <div class="row g-4">
+            {% for ser in services %}
+            
+            <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="feature-item h-100 p-4 pt-0">
+                    <div class="feature-icon p-4 mb-4">
+                        <i class="">
+                            <img src="{{ser.image.url}}" class="img-fluid rounded" style="width: 250px; height: 50px;" alt="">
+                        </i>
+                        
+                    </div>
+                    <h5 class="mb-4 p-0" style="display: flex; width: 100%;">{{ser.title}}</h5>
+                    <p class="mb-4">{{ser.description|safe}}
+                    </p>
+                    
+                </div>
+            </div>
+
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+
+        <!-- Testimonial Start -->
+        <div class="container-fluid testimonial pb-5">
+            <div class="container pb-5">
+                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s">
+                    <h4 class="text-primary">Testimonial</h4>
+                    <h1 class="display-4 mb-4">What Our Customers Are Saying</h1>
+                    <p class="mb-0">"The insights and strategies provided by Saandipani were transformative. Their expert guidance helped us overcome challenges and achieve measurable success. Highly recommended for anyone seeking top-tier consultancy!"
+                    </p>
+                </div>
+                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.2s">
+                    {% for tes in testimonials %}
+                    <div class="testimonial-item bg-light rounded">
+                        <div class="row g-0">
+                            <div class="col-4 col-lg-4 col-xl-3">
+
+                                <div class="h-100">
+                                    <img src="{{ tes.image.url }}" class="rounded-pill img-fluid" style="object-fit: cover; height: 150px;" alt="">
+                                </div>
+                            </div>
+
+                            <div class="col-8 col-lg-8 col-xl-9">
+                                <div class="d-flex flex-column my-auto text-start p-4">
+                                    <h4 class="text-dark mb-0">{{tes.name}}</h4>
+                                    <p class="mb-3">{{tes.position}}</p>
+                                    <div class="d-flex text-primary mb-3">
+                                        <i class="fas fa-star"></i>
+
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div style="text-align: justify;"><p class="mb-0">{{tes.description|safe}}
+                                    </p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+{% endblock %}

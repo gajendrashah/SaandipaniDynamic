@@ -1,0 +1,241 @@
+{% extends 'sanapp/base.html' %}
+
+{% block content %}
+{% load static %}
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:slnt,wght@-10..0,100..900&display=swap" rel="stylesheet">
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link rel="stylesheet" href="lib/animate/animate.min.css"/>
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="css/style.css" rel="stylesheet">
+
+
+        <!-- Contact Start -->
+        <div class="container-fluid contact bg-light py-5">
+            <div class="container py-5">
+                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                    <h4 class="text-primary">Contact Us</h4>
+                    <h1 class="display-4 mb-4">If you have any comments please apply now</h1>
+                </div>
+                <div class="row g-5 align-items-stretch">
+                    <div class="col-xl-6 d-flex align-items-stretch wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="contact-img d-flex justify-content-center w-100">
+                            <div class="contact-img-inner">
+                                <img src="{% static '' %}" class="img-fluid w-100 rounded-3" alt="Image" style="height: 600px; object-fit: cover;">
+                            </div>
+                        </div>
+                    </div>      
+                
+                    <div class="col-xl-6 d-flex align-items-stretch wow fadeInRight" data-wow-delay="0.4s">
+                        <div class="d-flex flex-column w-100">
+                            <h4 class="text-primary">GET IN TOUCH</h4>
+                            <p class="mb-4">We value your inquiries, send us a message and we'll get back to you.</p>
+                            <form id="contact-form" class="flex-grow-1 d-flex flex-column justify-content-between" method="post">
+                                {% csrf_token %}
+                                <div class="row g-3">
+                                    <div class="col-lg-12 col-xl-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0" id="name" name="name" placeholder="Your Name" required>
+                                            <label for="name">Your Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-xl-6">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control border-0" id="email" name="email" placeholder="Your Email" required>
+                                            <label for="email">Your Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-xl-6">
+                                        <div class="form-floating">
+                                            <input type="tel" class="form-control border-0" id="phone" name="phone" placeholder="Phone" required>
+                                            <label for="phone">Your Phone</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-xl-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0" id="project" name="project" placeholder="Project">
+                                            <label for="project">Your Project</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control border-0" id="subject" name="subject" placeholder="Subject" required>
+                                            <label for="subject">Subject</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating">
+                                            <textarea class="form-control border-0" placeholder="Leave a message here" id="message" name="message" style="height: 120px" required></textarea>
+                                            <label for="message">Message</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-primary w-100 py-3" type="submit"><a type="sub">Send Message</a></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div>
+                            <div class="row g-4">
+                                <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.2s">
+                                    <div class="contact-add-item">
+                                        <div class="contact-icon text-primary mb-4">
+                                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                                        </div>
+                                        <div>
+                                            <h4>Address</h4>
+                                            <p class="mb-0">Bagbazar, Kathmandu, Nepal</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.4s">
+                                    <div class="contact-add-item">
+                                        <div class="contact-icon text-primary mb-4">
+                                            <i class="fas fa-envelope fa-2x"></i>
+                                        </div>
+                                        <div>
+                                            <h4>Mail Us</h4>
+                                            <p class="mb-0">info@saandipani.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.6s">
+                                    <div class="contact-add-item">
+                                        <div class="contact-icon text-primary mb-4">
+                                            <i class="fa fa-phone-alt fa-2x"></i>
+                                        </div>
+                                        <div>
+                                            <h4>Telephone</h4>
+                                            <p class="mb-0">+977-01-5323-454</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-3 wow fadeInUp" data-wow-delay="0.8s">
+                                    <div class="contact-add-item">
+                                        <div class="contact-icon text-primary mb-4">
+                                            <i class="fab fa-firefox-browser fa-2x"></i>
+                                        </div>
+                                        <div>
+                                            <h4>Website</h4>
+                                            <p class="mb-0">saandipani.com</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="rounded">
+                            <iframe class="rounded w-100" 
+                            style="height: 400px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.369376129588!2d85.31676737453571!3d27.705879425557832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb198bbf2d96cb%3A0xaa01750a0e578029!2sSaandipani%20Group%20of%20Education!5e0!3m2!1sen!2snp!4v1739850410542!5m2!1sen!2snp" 
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-primary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+
+
+        
+        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+
+        <!-- Popup messages -->
+        <div id="popup-message" style="display:none; position:fixed; top:20px; right:20px; padding:15px; border-radius:5px; color:#fff; z-index:1000;"></div>
+
+        <!-- JavaScript for AJAX and popups -->
+        <script>
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const form = this;
+                const formData = new FormData(form);
+                const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': csrfToken,
+                    }
+                }).then(response => response.json())
+                .then(data => {
+                    const popup = document.getElementById('popup-message');
+                    if (data.status === 'success') {
+                        popup.textContent = data.message;
+                        popup.style.backgroundColor = 'green';
+                    } else {
+                        popup.textContent = data.message;
+                        popup.style.backgroundColor = 'red';
+                    }
+                    popup.style.display = 'block';
+                    setTimeout(() => {
+                        popup.style.display = 'none';
+                    }, 3000);
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        </script>
+
+    
+
+
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="lib/wow/wow.min.js"></script>
+        <script src="lib/easing/easing.min.js"></script>
+        <script src="lib/waypoints/waypoints.min.js"></script>
+        <script src="lib/counterup/counterup.min.js"></script>
+        <script src="lib/lightbox/js/lightbox.min.js"></script>
+        <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+        <!-- <script>
+            document.querySelector('form').addEventListener('sub', function (e) {
+              e.preventDefault(); // Prevent actual form submission (for demo purposes)
+          
+              // Simulate form submission success
+              setTimeout(() => {
+                alert('Your message has been sent successfully!'); // Simple alert message
+                this.reset(); // Reset form fields
+              }, 500); // Optional: Add slight delay for effect
+          
+            });
+          </script> -->
+          
+
+
+
+        
+        
+{% endblock %}
